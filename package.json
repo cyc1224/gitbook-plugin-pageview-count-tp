@@ -1,0 +1,37 @@
+{
+  "name": "gitbook-plugin-pageview-count-tp",
+  "version": "1.0.3",
+  "description": "gitbook plugin of thinkphp & mysql for pageview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyc1224/gitbook-plugin-pageview-count-tp.git"
+  },
+  "keywords": [
+    "php",
+    "mysql",
+    "pageview"
+  ],
+  "author": "TiannV",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/cyc1224/gitbook-plugin-pageview-count-tp/issues"
+  },
+  "homepage": "https://github.com/cyc1224/gitbook-plugin-pageview-count-tp#readme",
+  "engines": {
+    "gitbook": ">=2.5.0"
+  },
+  "gitbook": {
+    "properties": {
+      "url": {
+        "type": "string",
+        "default": "https://example.com",
+        "title": "count.php's route",
+        "description": "https://example.com/aaa/count?url=abc.com -> the default is https://example.com/aaa ."
+      }
+    }
+  }
+}
