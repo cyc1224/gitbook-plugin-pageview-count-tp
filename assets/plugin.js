@@ -14,7 +14,7 @@ var iconSVg = '<svg t="1543310294340" \
 require(["gitbook", "jQuery"], function (gitbook, $) {
   gitbook.events.bind("page.change", function() {
     const options = gitbook.state.config.pluginsConfig['pageview-count-tp'];//读取设置
-    var url = location.href.replace(/^http:\/\/[^/]+/, "").trim();
+    var url = location.href.replace(/^https:\/\/[^/]+/, "").trim();
     url = decodeURI(url);
     var s = url.split("/").pop();
     var title = s.replace(".html", "");
@@ -48,8 +48,8 @@ require(["gitbook", "jQuery"], function (gitbook, $) {
     var time = 0;
 
     Counter('get', '/count', { url:  url  }).done(function (results ) {
-        console.log(results)
-        if (results.time > 0) {
+      console.log(results)
+      if (results.time) {
         time = results.time+1;
         Counter('put', `/count`, {url: url, time: time }).done(function () {
           console.log(time);
