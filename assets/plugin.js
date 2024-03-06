@@ -13,7 +13,7 @@ var iconSVg = '<svg t="1543310294340" \
 
 require(["gitbook", "jQuery"], function (gitbook, $) {
   gitbook.events.bind("page.change", function() {
-    const options = gitbook.state.config.pluginsConfig['pageview-count-tp'];//读取设置
+    const options = $['pageview-count-tp'];//读取设置
     var url = location.href.replace(/^http:\/\/[^/]+/, "").trim();
     url = decodeURI(url);
     var s = url.split("/").pop();
