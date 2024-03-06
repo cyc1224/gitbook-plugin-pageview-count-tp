@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-pageview-count-tp",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "gitbook plugin of thinkphp & mysql for pageview",
   "main": "index.js",
   "scripts": {
