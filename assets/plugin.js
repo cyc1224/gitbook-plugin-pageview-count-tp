@@ -14,7 +14,7 @@ var iconSVg = '<svg t="1543310294340" \
 require(["gitbook", "jQuery"], function (gitbook, $) {
   gitbook.events.bind("page.change", function() {
     const options = gitbook.state.config.pluginsConfig['pageview-count-tp'];//读取设置
-    var url = location.href.replace(/^https:\/\/[^/]+/, "").trim();
+    var url = location.href.replace(/^http:\/\/[^/]+/, "").trim();
     url = decodeURI(url);
     var s = url.split("/").pop();
     var title = s.replace(".html", "");
@@ -23,8 +23,8 @@ require(["gitbook", "jQuery"], function (gitbook, $) {
     var bookHeader = $('.book-header')
     var lastChild = bookHeader.children().last()
     var renderWrapper = $('<div class="page-view-wrapper dropdown pull-left">\
-        <span class="btn toggle-dropdown">'+ iconSVg + '</span>\
-        <span class="page-view-counter" title="阅读数">-</span>\
+      <span class="btn toggle-dropdown">'+ iconSVg + '</span>\
+      <span class="page-view-counter" title="阅读数">-</span>\
       </div>')
 
     if(lastChild.length){
@@ -34,6 +34,7 @@ require(["gitbook", "jQuery"], function (gitbook, $) {
     }
 
     var Counter = function (method, url, data) {
+      console.log(data);
       return $.ajax({
         method: method,
         url : `${options.url}${url}`,//自定义网址
@@ -43,21 +44,25 @@ require(["gitbook", "jQuery"], function (gitbook, $) {
 
     var url = location.href.replace(/^https:\/\/[^/]+/, "").trim();
     url = decodeURI(url);
-    var s = url.split("/").pop();
-    var title = document.getElementsByTagName("title")[0];
+    // var s = url.split("/").pop();
+    // console.log(s);
+    var title = document.getElementsByTagName('title')[0].innerText;
+    console.log(title);
     var time = 0;
 
     Counter('get', '/count', { url:  url  }).done(function (results ) {
       console.log(results)
-      if (results.time) {
-        time = results.time+1;
+      if (results.time > 0) {
+        time = Number(results.time)+1;
+          console.log(time);
         Counter('put', `/count`, {url: url, time: time }).done(function () {
           console.log(time);
           renderWrapper.find('.page-view-counter').html(time)
         })
       } else {
-        Counter('post', '/count', { title: title, url: url, time: 1}).done(function ({ results }) {
-            renderWrapper.find('.page-view-counter').html(1)
+        Counter('post', '/count', { title: title, url: url, time: 1}).done(function () {
+          console.log("AddSuccess")
+          renderWrapper.find('.page-view-counter').html(1)
         })
       }
     });
